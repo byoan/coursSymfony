@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Managers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for manager in managers %}
+            <tr>
+                <td><a href="{{ path('manager_show', { 'id': manager.id }) }}">{{ manager.id }}</a></td>
+                <td>{{ manager.firstName }}</td>
+                <td>{{ manager.lastName }}</td>
+                <td>{{ manager.title }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('manager_show', { 'id': manager.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('manager_edit', { 'id': manager.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('manager_new') }}">Create a new manager</a>
+        </li>
+    </ul>
+{% endblock %}
