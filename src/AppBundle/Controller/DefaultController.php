@@ -57,4 +57,34 @@ class DefaultController extends Controller
             'name' => $name,
         ]);
     }
+
+    /**
+     * Displays the dashboard view
+     *
+     * @Route("/dashboard", name="dashboard")
+     *
+     * @param Request $request
+     */
+    public function displayDashboardAction(Request $request)
+    {
+        $entityManager = $this->container->get('doctrine.orm.entity_manager');
+
+        $projets = $entityManager
+            ->getRepository('AppBundle:Projet')
+            ->createQueryBuilder('p')
+            ->where('p.dateEnd >= :date')
+            ->setParameter('date', new \DateTime())
+            ->getQuery()
+            ->getResult();
+
+        $managers = $entityManager->getRepository('AppBundle:Manager')->findAll();
+
+        $fiches = $entityManager->getRepository('AppBundle:Fiche')->findAll();
+
+        return $this->render('projet/dashboard.html.twig', array(
+            'projects' => $projets,
+            'managers' => $managers,
+            'fiches' => $fiches
+        ));
+    }
 }
