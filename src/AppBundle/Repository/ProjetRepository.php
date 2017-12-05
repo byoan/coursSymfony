@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class ProjetRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Retrieves the opened projects according to the today's date
+     *
+     * @return mixed
+     */
+    public function getOpenedProjects()
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.dateEnd >= :date')
+            ->setParameter('date', new \Datetime());
+    }
 }

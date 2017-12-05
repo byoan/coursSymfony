@@ -6,6 +6,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\Projet;
+
 class FicheType extends AbstractType
 {
     /**
@@ -19,7 +23,17 @@ class FicheType extends AbstractType
                 ->add('progression')
                 ->add('comment')
                 ->add('manager')
-                ->add('project');
+                ->add('project', EntityType::class, array(
+                    'label' => 'Veuillez choisir ',
+                    'class' => Projet::class,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->getOpenedProjects();
+                        // Equivalent à ceci
+                        // return $er->createQueryBuilder('p')
+                        //     ->where('p.dateEnd >= :date')
+                        //     ->setParameter('date', new \Datetime());
+                    }
+                ));
     }
 
     /**
