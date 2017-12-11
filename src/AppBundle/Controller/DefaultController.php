@@ -18,7 +18,7 @@ class DefaultController extends Controller
 
         $fiche = $entityManager->getRepository('AppBundle:Fiche')->find(1);
 
-        $ficheCool = $entityManager->getRepository('AppBundle:Fiche')->findBy(array('projectName' => 'ProjetCool'));
+        $ficheCool = $entityManager->getRepository('AppBundle:Fiche')->findBy(array('project' => 'ProjetCool'));
 
         $fiches = $entityManager
             ->getRepository('AppBundle:Fiche')
@@ -28,7 +28,6 @@ class DefaultController extends Controller
             ->orderBy('f.ficheDate', 'DESC')
             ->getQuery()
             ->getResult();
-        dump($fiches);
 
         $em = $this->getDoctrine()->getManager();
         $query = $em->createQuery(
@@ -38,7 +37,6 @@ class DefaultController extends Controller
         )->setParameter('date', new \DateTime());
 
         $fiches = $query->getResult();
-        dump($fiches);
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
@@ -56,35 +54,5 @@ class DefaultController extends Controller
         return $this->render('default/hello.html.twig', [
             'name' => $name,
         ]);
-    }
-
-    /**
-     * Displays the dashboard view
-     *
-     * @Route("/dashboard", name="dashboard")
-     *
-     * @param Request $request
-     */
-    public function displayDashboardAction(Request $request)
-    {
-        $entityManager = $this->container->get('doctrine.orm.entity_manager');
-
-        $projets = $entityManager
-            ->getRepository('AppBundle:Projet')
-            ->createQueryBuilder('p')
-            ->where('p.dateEnd >= :date')
-            ->setParameter('date', new \DateTime())
-            ->getQuery()
-            ->getResult();
-
-        $managers = $entityManager->getRepository('AppBundle:Manager')->findAll();
-
-        $fiches = $entityManager->getRepository('AppBundle:Fiche')->findAll();
-
-        return $this->render('projet/dashboard.html.twig', array(
-            'projects' => $projets,
-            'managers' => $managers,
-            'fiches' => $fiches
-        ));
     }
 }
