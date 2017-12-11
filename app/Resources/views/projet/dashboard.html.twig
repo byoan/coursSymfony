@@ -1,39 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Dashboard</h1>
+    <div class="container">
+        <h1>Dashboard</h1>
 
-    <div>
-        <h2>Liste des projets en cours</h2>
-        {{ dump(projects) }}
-    </div>
-
-    <div>
-        <h2>Liste des managers</h2>
-        {{ dump(managers) }}
-    </div>
-
-    <div>
-        <h2>Fiches</h2>
-        {{ dump(fiches) }}
-        <table>
-            <thead>
-                <th>Date</th>
-                <th>Projet</th>
-                <th>% avancement</th>
-                <th>% consommé</th>
-            </thead>
-            <tbody>
-                {% for fiche in fiches %}
-                    <tr>
-                        <td>{{ fiche.ficheDate|date("m/d/Y") }}</td>
-                        {# <td>{{ projects[fiche.projet_id].name }}</td> #}
-                        <td></td>
-                        <td>{{ fiche.progression }}</td>
-                        <td>{{ fiche.nbDayDone/fiche.nbDayDone * 100 }}</td>
-                    </tr>
+        <div>
+            <h2>Liste des projets en cours</h2>
+            <ul>
+                {% for project in projects %}
+                    <li>{{ project }}</li>
                 {% endfor %}
-            </tbody>
-        </table>
+            </ul>
+        </div>
+
+        <div>
+            <h2>Liste des managers</h2>
+            <ul>
+                {% for manager in managers %}
+                    <li>{{ manager }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <div class="fichesHeader">
+                <h2>Fiches</h2>
+                {{ form_start(form)}}
+                {{ form_widget(form) }}
+                {{ form_end(form) }}
+            </div>
+
+            {% if fiches is empty %}
+                <p class="notFound">Aucune fiche trouvée pour le projet sélectionné</p>
+            {% else %}
+                <table class="table table-hover fichesContent">
+                    <thead>
+                        <th>Date</th>
+                        <th>Projet</th>
+                        <th>% avancement</th>
+                        <th>% consommé</th>
+                    </thead>
+                    <tbody>
+                        {% for fiche in fiches %}
+                            <tr>
+                                <td>{{ fiche.ficheDate|date("m/d/Y") }}</td>
+                                <td>{{ fiche.project }}</td>
+                                <td>{{ fiche.progression }}</td>
+                                <td>{{ fiche.nbDayDone/fiche.nbDayDone * 100 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
