@@ -51,8 +51,8 @@
                                 <td>{{ fiche.progression }} %</td>
                                 <td>{{ fiche.nbDayDone/fiche.nbDaySold * 100 }} %</td>
                                 <td>
-                                    <a class="btn btn-default" href="{{ path('fiche_show', {'id': fiche.id}) }}">Show fiche</a>
-                                    <a class="btn btn-primary" href="{{ path('fiche_edit', {'id': fiche.id}) }}">Edit fiche</a>
+                                    <a class="btn btn-default" href="{{ path('fiche_show', {'id': fiche.id}) }}">Voir</a>
+                                    <a class="btn btn-primary" href="{{ path('fiche_edit', {'id': fiche.id}) }}">Éditer</a>
                                 </td>
                             </tr>
                         {% endfor %}
