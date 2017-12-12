@@ -3,23 +3,25 @@
 {% block body %}
     <div class="container">
         <h1>Dashboard</h1>
+        <hr />
+        <div class="flexRow">
+            <div class="projectsContainer">
+                <h2>Liste des projets en cours</h2>
+                <ul>
+                    {% for project in projects %}
+                        <li>{{ project }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-        <div>
-            <h2>Liste des projets en cours</h2>
-            <ul>
-                {% for project in projects %}
-                    <li>{{ project }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <div>
-            <h2>Liste des managers</h2>
-            <ul>
-                {% for manager in managers %}
-                    <li>{{ manager }}</li>
-                {% endfor %}
-            </ul>
+            <div class="managerContainer">
+                <h2>Liste des managers</h2>
+                <ul>
+                    {% for manager in managers %}
+                        <li>{{ manager }} - {{ manager.title }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
 
         <div>
@@ -68,6 +70,18 @@
         }
         .notFound {
             text-align: center;
+        }
+        .flexRow {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 5rem;
+        }
+        .projectsContainer {
+            flex: 1;
+        }
+        .managerContainer {
+            flex: 1;
         }
     </style>
 {% endblock %}
