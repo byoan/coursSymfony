@@ -29,6 +29,10 @@ security:
             form_login:
                 check_path: login
                 login_path: login
+
+            logout:
+                path: /logout
+                target: /
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
