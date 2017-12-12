@@ -29,6 +29,14 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\Service\RandomImageGenerator:
+        public: true
+        arguments:
+            - ['dog', 'cat', 'bird']
+            - 600
+            - 600
+            # $someArgument: 'some_value'
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
