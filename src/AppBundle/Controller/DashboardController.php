@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use AppBundle\Entity\Projet;
+use AppBundle\Service\RandomImageGenerator;
 
 class DashboardController extends Controller
 {
@@ -23,6 +24,9 @@ class DashboardController extends Controller
     public function displayDashboardAction(Request $request)
     {
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
+
+        // Get random image
+        $randomImage = $this->container->get(RandomImageGenerator::class)->getRandomImageURL();
 
         $projects = $entityManager
                 ->getRepository('AppBundle:Projet')
@@ -60,6 +64,7 @@ class DashboardController extends Controller
             'managers' => $managers,
             'fiches' => $fiches,
             'form' => $form->createView(),
+            'randomImage' => $randomImage,
         ));
     }
 }
