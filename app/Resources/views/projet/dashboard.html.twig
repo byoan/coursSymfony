@@ -39,16 +39,21 @@
                     <thead>
                         <th>Date</th>
                         <th>Projet</th>
-                        <th>% avancement</th>
-                        <th>% consommé</th>
+                        <th>Progression</th>
+                        <th>Consommé</th>
+                        <th>Action</th>
                     </thead>
                     <tbody>
                         {% for fiche in fiches %}
                             <tr>
                                 <td>{{ fiche.ficheDate|date("m/d/Y") }}</td>
                                 <td>{{ fiche.project }}</td>
-                                <td>{{ fiche.progression }}</td>
-                                <td>{{ fiche.nbDayDone/fiche.nbDayDone * 100 }}</td>
+                                <td>{{ fiche.progression }} %</td>
+                                <td>{{ fiche.nbDayDone/fiche.nbDaySold * 100 }} %</td>
+                                <td>
+                                    <a class="btn btn-default" href="{{ path('fiche_show', {'id': fiche.id}) }}">Show fiche</a>
+                                    <a class="btn btn-primary" href="{{ path('fiche_edit', {'id': fiche.id}) }}">Edit fiche</a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
