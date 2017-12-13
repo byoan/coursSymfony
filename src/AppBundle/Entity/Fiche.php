@@ -301,4 +301,9 @@ class Fiche
     {
         return $this->project;
     }
+
+    public function __toString()
+    {
+        return $this->comment;
+    }
 }
