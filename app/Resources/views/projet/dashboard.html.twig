@@ -7,29 +7,63 @@
         <div class="flexRow">
             <div class="projectsContainer">
                 <h2>Liste des projets en cours</h2>
-                <ul>
-                    {% for project in projects %}
-                        <li>{{ project }} - {{project.progression}} %</li>
-                    {% endfor %}
-                </ul>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Nom du projet</th>
+                        <th>Progression</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        {% for project in projects %}
+                        <tr>
+                            <td>{{ project }}</td>
+                            <td>{{ project.progression }} %</td>
+                            <td>
+                                <a class="btn btn-default btn-sm" href="{{ path('projet_show', {'id': project.id}) }}">Voir</a>
+                                <a class="btn btn-primary btn-sm" href="{{ path('projet_edit', {'id': project.id}) }}">Éditer</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+
+            <div class="separator"></div>
 
             <div class="managerContainer">
                 <h2>Liste des managers</h2>
-                <ul>
-                    {% for manager in managers %}
-                        <li>{{ manager }} - {{ manager.title }}</li>
-                    {% endfor %}
-                </ul>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Poste</th>
+                        <th>Actions</th>
+                    </thead>
+                    <tbody>
+                        {% for manager in managers %}
+                            <tr>
+                                <td>{{ manager.lastName }}</td>
+                                <td>{{ manager.firstName }}</td>
+                                <td>{{ manager.title }}</td>
+                                <td>
+                                    <a class="btn btn-default btn-sm" href="{{ path('manager_show', {'id': manager.id}) }}">Voir</a>
+                                    <a class="btn btn-primary btn-sm" href="{{ path('manager_edit', {'id': manager.id}) }}">Éditer</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <div>
             <div class="fichesHeader">
                 <h2>Fiches</h2>
-                {{ form_start(form)}}
-                {{ form_widget(form) }}
-                {{ form_end(form) }}
+                <div class="formContainer">
+                    {{ form_start(form)}}
+                    {{ form_widget(form) }}
+                    {{ form_end(form) }}
+                </div>
             </div>
 
             {% if fiches is empty %}
@@ -39,7 +73,6 @@
                     <thead>
                         <th>Date</th>
                         <th>Projet</th>
-                        <th>Progression</th>
                         <th>Consommé</th>
                         <th>Action</th>
                     </thead>
@@ -48,7 +81,6 @@
                             <tr>
                                 <td>{{ fiche.ficheDate|date("m/d/Y") }}</td>
                                 <td>{{ fiche.project }}</td>
-                                <td>{{ fiche.progression }} %</td>
                                 <td>{{ fiche.nbDayDone/fiche.nbDaySold * 100 }} %</td>
                                 <td>
                                     <a class="btn btn-default" href="{{ path('fiche_show', {'id': fiche.id}) }}">Voir</a>
@@ -87,6 +119,13 @@
         }
         .managerContainer {
             flex: 1;
+        }
+        .separator {
+            flex: 0.1;
+        }
+        .formContainer {
+            display: inline-flex;
+            align-items: center;
         }
         body {
             background: url({{ randomImage }}) no-repeat;
