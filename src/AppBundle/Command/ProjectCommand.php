@@ -31,7 +31,7 @@ class ProjectCommand extends Command
         $rows = array();
 
         foreach ($this->projectService->getAvancementProjet() as $projectName => $progression) {
-            $rows[] = array($projectName, $progression);
+            $rows[] = array($projectName, $progression . '%');
         }
 
         $table
