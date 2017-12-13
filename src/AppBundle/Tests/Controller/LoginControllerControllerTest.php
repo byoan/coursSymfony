@@ -19,5 +19,4 @@ class LoginControllerControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/register');
     }
-
 }

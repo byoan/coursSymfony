@@ -33,6 +33,4 @@ class ManagerType extends AbstractType
     {
         return 'appbundle_manager';
     }
-
-
 }

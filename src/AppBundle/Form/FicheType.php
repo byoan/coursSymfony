@@ -53,6 +53,4 @@ class FicheType extends AbstractType
     {
         return 'appbundle_fiche';
     }
-
-
 }

@@ -33,6 +33,4 @@ class ProjetType extends AbstractType
     {
         return 'appbundle_projet';
     }
-
-
 }
