@@ -63,6 +63,7 @@
                     {{ form_start(form)}}
                     {{ form_widget(form) }}
                     {{ form_end(form) }}
+                    <a href="{{ path('dashboard') }}" class="resetButton btn btn-info">Reset</a>
                 </div>
             </div>
 
@@ -126,6 +127,12 @@
         .formContainer {
             display: inline-flex;
             align-items: center;
+        }
+        /* Margin top is required to align the reset butitn with the send one
+        as bootstrap applies a margin to its form groups */
+        .resetButton {
+            margin-top: 1rem;
+            margin-left: 1rem;
         }
         body {
             background: url({{ randomImage }}) no-repeat;
