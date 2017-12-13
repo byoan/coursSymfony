@@ -176,4 +176,15 @@ class Projet
     {
         return $this->fiches;
     }
+
+    public function getProgression()
+    {
+        $maxProgression = 0;
+        foreach ($this->fiches as $fiche) {
+            if ($fiche->getProgression() > $maxProgression) {
+                $maxProgression = $fiche->getProgression();
+            }
+        }
+        return $maxProgression;
+    }
 }

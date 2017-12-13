@@ -9,7 +9,7 @@
                 <h2>Liste des projets en cours</h2>
                 <ul>
                     {% for project in projects %}
-                        <li>{{ project }}</li>
+                        <li>{{ project }} - {{project.progression}} %</li>
                     {% endfor %}
                 </ul>
             </div>
